@@ -81,7 +81,7 @@ export const adminApi = (app) => {
                 console.log(`Inserted row with ID ${results.insertId}`);
             }
         });
+        res.json({ error: 'null', data: 'Data inserted.' });
     })
-    res.json({ error: 'null', data: 'Data inserted.' });
 }
 

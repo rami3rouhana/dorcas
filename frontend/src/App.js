@@ -1,9 +1,12 @@
 import './App.css';
+import Main from './Main';
+import SideNav from './components/SideNav';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-
+      <SideNav/>
+      <Main />
     </div>
   );
 }

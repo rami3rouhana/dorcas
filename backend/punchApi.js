@@ -7,9 +7,11 @@ export const punchApi = (app) => {
     const router = express.Router();
     app.use('/punch', router);
 
-    router.get('/:id', (req, res) => {
+    router.get('/:id/:start/:end', (req, res) => {
         const userId = req.params.id;
-        connection.query('SELECT * FROM `punch` WHERE `uid` = 1', userId, (err, rows) => {
+        const startDate = req.params.start;
+        const endDate = req.params.end;
+        connection.query('SELECT punch.id, punch.time, punch.state, punch.comment, work_location.locations FROM punch INNER JOIN work_location ON punch.work_location_id = work_location.id AND punch.uid=? WHERE punch.time BETWEEN ? AND ?', [userId, startDate, endDate], (err, rows) => {
             res.json(rows);
         });
     });

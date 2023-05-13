@@ -15,7 +15,7 @@ const StartServer = async () => {
     connectDatabase();
 
     app.get('/', (req, res) => {
-        connection.query('SELECT * FROM `users`', (err, rows) => {
+        connection.query('SELECT id, name FROM `users`', (err, rows) => {
             res.json(rows);
         });
     })
