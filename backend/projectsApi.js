@@ -31,14 +31,14 @@ export const projectApis = (app) => {
 
     router.delete('/:id', (req, res) => {
         const projectId = req.params.id;
-        connection.query('DELETE FROM `projects` WHERE `id`= ?', [projectId], (err, rows) => {
+        connection.query('DELETE FROM `projects` WHERE `id`= ?', [projectId], (err, results, fields) => {
             res.json({ err, results, fields });
         });
     })
 
     router.get('/user/:id', (req, res) => {
         const userId = req.params.id;
-        connection.query('SELECT projects.name,user_projects.percentage FROM `user_projects` INNER JOIN `projects` ON projects.id = user_projects.project_id AND user_projects.uid = ?', [userId], (err, rows) => {
+        connection.query('SELECT user_projects.id,projects.name,user_projects.percentage FROM `user_projects` INNER JOIN `projects` ON projects.id = user_projects.project_id AND user_projects.uid = ?', [userId], (err, rows) => {
             res.json(rows);
         });
     });
@@ -47,6 +47,13 @@ export const projectApis = (app) => {
         const userId = req.params.id;
         const { projectId, percentage } = req.body;
         connection.query('INSERT INTO `user_projects`(`uid`, `project_id`, `percentage`) VALUES (?,?,?)', [userId, projectId, percentage], (err, rows) => {
+            res.json(rows);
+        });
+    });
+
+    router.delete('/user/:id', (req, res) => {
+        const projectId = req.params.id;
+        connection.query('DELETE FROM `user_projects` WHERE `id`= ?', [projectId], (err, rows) => {
             res.json(rows);
         });
     });

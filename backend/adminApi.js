@@ -2,6 +2,7 @@ import fs, { stat } from 'fs';
 import express from 'express';
 import moment from 'moment';
 import { connection } from './connectDatabase.js';
+import reader from 'xlsx';
 
 export const adminApi = (app) => {
 
@@ -83,5 +84,6 @@ export const adminApi = (app) => {
         });
         res.json({ error: 'null', data: 'Data inserted.' });
     })
+
 }
 

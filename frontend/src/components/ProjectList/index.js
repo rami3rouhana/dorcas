@@ -13,14 +13,25 @@ const ProjectList = () => {
         fetchData();
     }, []);
 
+    const deleteProject = async (e) => {
+        const projectId = e.currentTarget.parentElement.parentElement.className;
+        e.currentTarget.parentElement.parentElement.remove()
+        try {
+            await axios.delete(`http://localhost:8000/projects/${projectId}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <ul>
-            {projects.map((project) =>
-                <ul key={project.id}>
+            {projects.length !== 0 && projects.map((project) =>
+                <ul key={project.id} className={project.id}>
                     <li>{project.name}</li>
                     <li>{project.location}</li>
                     <li>{project.start_date}</li>
                     <li>{project.end_date}</li>
+                    <li><button onClick={deleteProject}>Delete</button></li>
                 </ul>
             )}
         </ul>
