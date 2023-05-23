@@ -5,6 +5,7 @@ import 'react-datetime/css/react-datetime.css';
 import PunchTable from "../components/PunchTable";
 import ReactToPrint from "react-to-print";
 import { Button } from "react-bootstrap";
+import UploadButton from "../components/UploadButton";
 
 const PunchPage = () => {
     const [users, setUsers] = useState([]);
@@ -73,6 +74,7 @@ const PunchPage = () => {
                 {/* component to be printed */}
                 <PunchTable ref={componentRef} userID={userID} startDate={selectedStartDatetime} endDate={selectedEndDatetime} isPrinting={isPrinting} />
             </div>
+            <UploadButton userId={userID} />
         </div>
     );
 };

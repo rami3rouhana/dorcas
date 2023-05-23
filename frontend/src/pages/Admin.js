@@ -1,9 +1,8 @@
+import UploadButton from "../components/UploadButton";
 
 const AdminPage = () => {
     return (
-        <div className="Admin">
-            <p>Hello</p>
-        </div>
+        <UploadButton userId={"None"} />
     );
 }
 
